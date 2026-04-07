@@ -63,6 +63,17 @@ z-index: 20;
 .btn-back:active { background: rgba(255,255,255,.12); color: var(--text); }
 .btn-back svg { width: 16px; height: 16px; }
 
+.btn-back,
+.btn-replay,
+.btn-add-player,
+.btn-spin,
+.btn-do-spin,
+.btn-spin-again,
+.btn-del-player,
+.player-input {
+  touch-action: manipulation;
+}
+
 /* ══════════════════ HOME ══════════════════ */
 #home {
 gap: 0;
@@ -230,6 +241,7 @@ width: min(88vw, 340px);
 display: flex; flex-direction: column; gap: 8px;
 max-height: 38vh; overflow-y: auto;
 padding-right: 4px;
+-webkit-overflow-scrolling: touch;
 }
 .player-row {
 display: flex; align-items: center; gap: 10px;
