@@ -390,3 +390,15 @@ to{transform:translate(-50%,-50%) scale(1.35);opacity:0}
 50%{transform:translate(-50%,-50%) scale(1.2);opacity:.6}
 }
 @keyframes confetti-drop { to{transform:translateY(115vh) rotate(800deg);opacity:0} }
+
+body.ruleta-page {
+  touch-action: pan-y;
+}
+
+body.ruleta-page .players-list {
+  touch-action: pan-y;
+}
+
+body.dedos-page {
+  touch-action: none;
+}

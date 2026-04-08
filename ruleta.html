@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#080810" />
+  <title>¿Quién va? · Modo Ruleta</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="ruleta-page">
+  <div id="flood"></div>
+
+  <div class="screen active" id="wheel-setup">
+    <button class="btn-back" id="w-back-btn" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <path d="M15 18l-6-6 6-6" />
+      </svg>
+      Inicio
+    </button>
+
+    <div class="w-title">Modo Ruleta</div>
+    <p class="w-instr">Agrega los jugadores</p>
+
+    <div class="players-list" id="players-list"></div>
+
+    <button class="btn-add-player" id="btn-add" type="button">+ Agregar jugador</button>
+    <button class="btn-spin" id="btn-go-spin" type="button">Girar ruleta 🎡</button>
+  </div>
+
+  <div class="screen hidden" id="wheel-spin">
+    <button class="btn-back" id="ws-back-btn" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <path d="M15 18l-6-6 6-6" />
+      </svg>
+      Jugadores
+    </button>
+
+    <div class="wheel-wrap">
+      <div class="wheel-pointer"></div>
+      <canvas id="wheel-canvas" width="600" height="600"></canvas>
+      <div class="wheel-center">
+        <div class="wheel-center-dot"></div>
+      </div>
+    </div>
+
+    <button class="btn-do-spin" id="btn-do-spin" type="button">¡GIRAR!</button>
+  </div>
+
+  <div class="screen hidden" id="wheel-result">
+    <div class="wr-eyebrow">¡La ruleta eligió a!</div>
+    <div class="wr-name" id="wr-name">Jugador</div>
+    <div class="wr-sub" id="wr-sub"></div>
+
+    <button class="btn-spin-again" id="btn-spin-again" type="button">Girar de nuevo</button>
+    <button class="btn-back" id="wr-home-btn" type="button" style="position:static;margin-top:10px;font-size:13px">
+      ← Inicio
+    </button>
+  </div>
+
+  <div id="toast"></div>
+
+  <script src="common.js"></script>
+  <script src="ruleta.js"></script>
+</body>
+</html>
