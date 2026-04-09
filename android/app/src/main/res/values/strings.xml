@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Quien Va</string>
+    <string name="title_activity_main">Quien Va</string>
+    <string name="package_name">com.bluefeet.quienva</string>
+    <string name="custom_url_scheme">com.bluefeet.quienva</string>
+</resources>

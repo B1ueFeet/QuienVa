@@ -50,17 +50,19 @@ pointer-events: none;
 position: absolute; top: 20px; left: 20px;
 display: flex; align-items: center; gap: 6px;
 padding: 8px 16px 8px 10px;
-border: none; border-radius: 100px;
-background: rgba(255,255,255,.07);
-border: 1px solid var(--border);
-color: var(--muted);
+border-radius: 100px;
+background: rgba(255,255,255,.13);
+border: 1px solid rgba(255,255,255,.22);
+color: rgba(255,255,255,.85);
 font-family: 'DM Sans', sans-serif;
-font-size: 13px; font-weight: 500;
+font-size: 13px; font-weight: 600;
 cursor: pointer;
-transition: background .2s, color .2s;
+transition: background .2s, color .2s, border-color .2s;
 z-index: 20;
+letter-spacing: .02em;
 }
-.btn-back:active { background: rgba(255,255,255,.12); color: var(--text); }
+.btn-back:hover { background: rgba(255,255,255,.2); border-color: rgba(255,255,255,.35); color: #fff; }
+.btn-back:active { background: rgba(255,255,255,.25); color: #fff; }
 .btn-back svg { width: 16px; height: 16px; }
 
 .btn-back,
