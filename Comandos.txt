@@ -1,0 +1,6 @@
+copy archivos 
+npx cap copy android
+
+
+abrir en android 
+npx cap open android

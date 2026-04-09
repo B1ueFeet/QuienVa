@@ -8,6 +8,7 @@ const {
   floodColor,
   clearFlood,
   spawnConfetti,
+  stopConfetti,
   isInteractiveTarget,
 } = window.AppCommon;
 
@@ -199,6 +200,7 @@ function fingerReset() {
   fColorPool = 0;
   fState = 'idle';
 
+  stopConfetti();
   clearFlood();
   fUpdateBadge();
 }
