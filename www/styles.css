@@ -202,6 +202,20 @@ pointer-events: all;
 }
 .btn-replay:active { transform: scale(.95); background: rgba(255,255,255,.1); }
 
+/* Bottom action bar for result screens */
+#finger-result .btn-replay,
+#finger-result #f-home-btn {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 600;
+  margin: 0;
+  animation: none;
+  opacity: 1;
+}
+#finger-result .btn-replay  { bottom: 80px; }
+#finger-result #f-home-btn  { bottom: 36px; font-size: 13px; }
+
 /* ══════════════════ TOUCH RINGS ══════════════════ */
 .t-ring {
 position: fixed; border-radius: 50%;
@@ -403,4 +417,309 @@ body.ruleta-page .players-list {
 
 body.dedos-page {
   touch-action: none;
+}
+
+/* ══════════════════ TOP CONTROLS (DEDOS) ══════════════════ */
+.top-controls {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  z-index: 50;
+  touch-action: manipulation;
+}
+
+/* ── Pill button ── */
+.ctrl-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 12px 7px 10px;
+  border-radius: 100px;
+  background: rgba(255,255,255,.10);
+  border: 1px solid rgba(255,255,255,.18);
+  color: rgba(255,255,255,.85);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: .02em;
+  transition:
+    background .2s ease,
+    border-color .2s ease,
+    color .2s ease,
+    opacity .2s ease;
+  white-space: nowrap;
+  touch-action: manipulation;
+}
+.ctrl-pill:hover {
+  background: rgba(255,255,255,.18);
+  border-color: rgba(255,255,255,.32);
+  color: #fff;
+}
+.ctrl-pill:active {
+  background: rgba(255,255,255,.24);
+}
+
+.ctrl-pill-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+.ctrl-pill-label {
+  min-width: 14px;
+  text-align: center;
+}
+.ctrl-pill-arrow {
+  width: 13px;
+  height: 13px;
+  opacity: .6;
+  transition: transform .25s cubic-bezier(.34,1.56,.64,1);
+  flex-shrink: 0;
+}
+
+/* Arrow rotates when menu open */
+.ctrl-menu.open ~ .ctrl-pill .ctrl-pill-arrow,
+.ctrl-dropdown:has(.ctrl-menu.open) .ctrl-pill-arrow {
+  transform: rotate(180deg);
+}
+
+/* ── Dropdown container ── */
+.ctrl-dropdown {
+  position: relative;
+}
+
+/* Disabled state (count when teams mode) */
+.ctrl-dropdown.disabled .ctrl-pill {
+  opacity: .38;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.ctrl-dropdown.disabled .ctrl-pill::after {
+  content: '';
+}
+
+/* ── Dropdown menu ── */
+.ctrl-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 160px;
+  background: #1a1a2e;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 16px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.7),
+    0 4px 20px rgba(0,0,0,.5),
+    inset 0 1px 0 rgba(255,255,255,.06);
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(.88) translateY(-8px);
+  transform-origin: top right;
+  transition:
+    opacity .22s cubic-bezier(.34,1.56,.64,1),
+    transform .22s cubic-bezier(.34,1.56,.64,1);
+  z-index: 9999;
+}
+
+.ctrl-menu.open {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: all;
+}
+
+/* ── Menu option ── */
+.ctrl-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: none;
+  background: none;
+  color: rgba(255,255,255,.65);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    background .15s ease,
+    color .15s ease,
+    transform .12s ease;
+  touch-action: manipulation;
+}
+.ctrl-option:active {
+  transform: scale(.97);
+}
+.ctrl-option:hover {
+  background: rgba(255,255,255,.07);
+  color: rgba(255,255,255,.9);
+}
+
+.ctrl-opt-icon {
+  font-size: 16px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.ctrl-opt-text {
+  flex: 1;
+}
+
+/* Checkmark — hidden by default, visible when active */
+.ctrl-opt-check {
+  font-size: 13px;
+  opacity: 0;
+  color: #c4b5fd;
+  transition: opacity .15s, transform .2s;
+  transform: scale(.4);
+}
+
+.ctrl-option.active {
+  background: rgba(196,181,253,.1);
+  color: #e2d9ff;
+}
+.ctrl-option.active .ctrl-opt-check {
+  opacity: 1;
+  transform: scale(1);
+}
+.ctrl-option.active .ctrl-opt-text {
+  font-weight: 600;
+}
+
+/* Stagger option items on open */
+.ctrl-menu.open .ctrl-option:nth-child(1) { animation: optIn .2s .04s cubic-bezier(.34,1.56,.64,1) both; }
+.ctrl-menu.open .ctrl-option:nth-child(2) { animation: optIn .2s .09s cubic-bezier(.34,1.56,.64,1) both; }
+.ctrl-menu.open .ctrl-option:nth-child(3) { animation: optIn .2s .14s cubic-bezier(.34,1.56,.64,1) both; }
+
+@keyframes optIn {
+  from { opacity: 0; transform: translateY(-6px) scale(.96); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);   }
+}
+
+/* ══════════════════ MULTI-WINNER RESULT ══════════════════ */
+.multi-winners {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  max-width: 340px;
+}
+
+.multi-winner-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(var(--rgb), .12);
+  border: 2px solid var(--c);
+  box-shadow:
+    0 0 24px rgba(var(--rgb), .35),
+    inset 0 1px 0 rgba(255,255,255,.08);
+  animation: chipPop .5s cubic-bezier(.17,.67,.3,1.45) both;
+  min-width: 100px;
+}
+
+.mwc-blob {
+  font-size: 52px;
+  line-height: 1;
+  filter: drop-shadow(0 0 14px var(--c));
+}
+
+@keyframes chipPop {
+  from { opacity: 0; transform: scale(.4) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ══════════════════ TEAMS RESULT ══════════════════ */
+.teams-container {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.team-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 130px;
+  max-width: 150px;
+  padding: 14px 10px;
+  border-radius: 20px;
+  background: rgba(var(--trgb), .08);
+  border: 2px solid rgba(var(--trgb), .4);
+  box-shadow:
+    0 0 30px rgba(var(--trgb), .2),
+    inset 0 1px 0 rgba(255,255,255,.06);
+  animation: teamSlide .5s cubic-bezier(.17,.67,.3,1.45) both;
+}
+
+@keyframes teamSlide {
+  from { opacity: 0; transform: translateY(24px) scale(.9); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.team-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.team-icon { font-size: 18px; }
+
+.team-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: .06em;
+  color: var(--tc);
+  text-shadow: 0 0 16px rgba(var(--trgb), .6);
+}
+
+.team-members {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.team-member-chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.1);
+  animation: memberFade .3s ease both;
+}
+
+@keyframes memberFade {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.tmc-emoji {
+  font-size: 26px;
+  line-height: 1;
+}
+
+.tmc-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,.8);
+  letter-spacing: .02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

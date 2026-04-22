@@ -20,9 +20,64 @@
       Inicio
     </button>
 
-    <div class="f-hand">☝️</div>
+    <!-- Top-right controls -->
+    <div class="top-controls" id="top-controls">
+
+      <!-- Mode dropdown: Al azar / Equipos -->
+      <div class="ctrl-dropdown" id="mode-dropdown">
+        <button class="ctrl-pill" id="mode-pill" type="button">
+          <span class="ctrl-pill-icon">🎲</span>
+          <span class="ctrl-pill-label" id="mode-label">Al azar</span>
+          <svg class="ctrl-pill-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 9l6 6 6-6"/>
+          </svg>
+        </button>
+        <div class="ctrl-menu" id="mode-menu">
+          <button class="ctrl-option active" data-value="random" type="button">
+            <span class="ctrl-opt-icon">🎲</span>
+            <span class="ctrl-opt-text">Al azar</span>
+            <span class="ctrl-opt-check">✓</span>
+          </button>
+          <button class="ctrl-option" data-value="teams" type="button">
+            <span class="ctrl-opt-icon">⚔️</span>
+            <span class="ctrl-opt-text">Equipos</span>
+            <span class="ctrl-opt-check">✓</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Count dropdown: 1 / 2 / 3 -->
+      <div class="ctrl-dropdown" id="count-dropdown">
+        <button class="ctrl-pill" id="count-pill" type="button">
+          <span class="ctrl-pill-label" id="count-label">1</span>
+          <svg class="ctrl-pill-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 9l6 6 6-6"/>
+          </svg>
+        </button>
+        <div class="ctrl-menu" id="count-menu">
+          <button class="ctrl-option active" data-value="1" type="button">
+            <span class="ctrl-opt-icon">☝️</span>
+            <span class="ctrl-opt-text">1 persona</span>
+            <span class="ctrl-opt-check">✓</span>
+          </button>
+          <button class="ctrl-option" data-value="2" type="button">
+            <span class="ctrl-opt-icon">✌️</span>
+            <span class="ctrl-opt-text">2 personas</span>
+            <span class="ctrl-opt-check">✓</span>
+          </button>
+          <button class="ctrl-option" data-value="3" type="button">
+            <span class="ctrl-opt-icon">🤟</span>
+            <span class="ctrl-opt-text">3 personas</span>
+            <span class="ctrl-opt-check">✓</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="f-hand" id="f-hand">☝️</div>
     <div class="f-title">Modo Dedos</div>
-    <p class="f-instr">Todos apoyan un<br><em>dedo en la pantalla</em></p>
+    <p class="f-instr" id="f-instr">Todos apoyan un<br><em>dedo en la pantalla</em></p>
     <div class="f-badge" id="f-badge">Sin dedos aún</div>
   </div>
 
@@ -32,10 +87,26 @@
   </div>
 
   <div class="screen hidden" id="finger-result">
-    <div class="res-eyebrow">¡El elegido es!</div>
-    <div class="winner-blob" id="f-winner-blob">☝️</div>
-    <div class="winner-name" id="f-winner-name">Jugador Rojo</div>
-    <div class="winner-sub" id="f-winner-sub"></div>
+    <div class="res-eyebrow" id="f-res-eyebrow">¡El elegido es!</div>
+
+    <!-- Single winner layout -->
+    <div id="f-single-result">
+      <div class="winner-blob" id="f-winner-blob">☝️</div>
+      <div class="winner-name" id="f-winner-name">Jugador Rojo</div>
+      <div class="winner-sub" id="f-winner-sub"></div>
+    </div>
+
+    <!-- Multi-winner layout -->
+    <div id="f-multi-result" style="display:none">
+      <div class="multi-winners" id="f-multi-winners"></div>
+      <div class="winner-sub" id="f-multi-sub"></div>
+    </div>
+
+    <!-- Teams layout -->
+    <div id="f-teams-result" style="display:none">
+      <div class="teams-container" id="f-teams-container"></div>
+      <div class="winner-sub" id="f-teams-sub"></div>
+    </div>
 
     <button class="btn-replay" id="f-replay-btn" type="button">Volver a jugar</button>
     <button class="btn-back" id="f-home-btn" type="button" style="position:static;margin-top:10px;font-size:13px">
